@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "rubydog-sites"
+  },
+  "targets": {
+    "rubydog-sites": {
+      "hosting": {
+        "packages": [
+          "rubydogjp-packages"
+        ]
+      }
+    }
+  }
+}
