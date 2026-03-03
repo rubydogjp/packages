@@ -8,7 +8,7 @@ class FlutterThemeCreator {
 
     return ThemeData(
       fontFamily: 'NotoSansJP',
-      package: 'virtual_phone',
+      package: 'demo_site',
       primaryColor: pallete.activeButton,
       scaffoldBackgroundColor: pallete.background,
       cardColor: pallete.card,

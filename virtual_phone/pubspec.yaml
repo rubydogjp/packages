@@ -29,9 +29,3 @@ dev_dependencies:
 flutter:
   assets:
     - assets/images/
-    - assets/fonts/OFL.txt
-  fonts:
-    - family: NotoSansJP
-      fonts:
-        - asset: assets/fonts/NotoSansJP-Bold.otf
-        - asset: assets/fonts/NotoSansJP-Regular.otf

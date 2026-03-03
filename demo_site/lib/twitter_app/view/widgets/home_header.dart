@@ -34,7 +34,7 @@ class HomeHeader extends StatelessWidget {
           SizedBox(
             width: 40,
             child: Image.asset(
-              package: 'virtual_phone',
+              package: 'demo_site',
               'assets/images/twitter.png',
             ),
           ),

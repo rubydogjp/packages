@@ -15,7 +15,7 @@ class UserIcon extends StatelessWidget {
         shape: BoxShape.circle,
         image: DecorationImage(
           image: AssetImage(
-            package: 'virtual_phone',
+            package: 'demo_site',
             uri,
           ),
           fit: BoxFit.contain,
