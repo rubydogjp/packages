@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:virtual_phone/src/view/widgets/minimal_page.dart';
-import 'package:virtual_tester/virtual_tester.dart';
+
+import '../pages/action_list.dart';
 
 class TestPage extends StatelessWidget {
   const TestPage({super.key});
@@ -9,7 +10,7 @@ class TestPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MinimalPage(
       title: '自動テスト (ベータ版)',
-      body: VirtualTesterPage(),
+      body: ActionListPage(),
     );
   }
 }

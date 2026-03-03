@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:virtual_tester/virtual_tester.dart';
-
 import '../../state/device_model/provider.dart';
+import '../router/test_scope.dart';
 import '../widgets/device.dart';
 
 class DeviceContainerPage extends ConsumerWidget {
@@ -31,7 +30,7 @@ class DeviceContainerPage extends ConsumerWidget {
         Container(
           padding: const EdgeInsets.all(20),
           alignment: Alignment.center,
-          child: VirtualTesterTarget(
+          child: TestScope(
             child: DeviceView(
               model: deviceModel,
               app: app,
