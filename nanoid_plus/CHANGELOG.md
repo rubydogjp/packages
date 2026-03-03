@@ -1,0 +1,40 @@
+## 1.8.0
+
+- [docs] give up Language anchors
+
+## 1.7.0
+
+- [docs] fix Language anchors
+
+## 1.6.0
+
+- [docs] fix Language anchors
+
+## 1.5.0
+
+- [docs] fix Language anchors
+
+## 1.4.0
+
+- [docs] fix features list
+
+## 1.3.0
+
+- [FIX] `NanoID` is now deprecated.
+- [NEW] **`Nanoid`** is introduced.
+
+## 1.2.0
+
+- [deps] Require Dart 3.9.0
+
+## 1.1.0
+
+- [NEW] excludedCharSet
+
+## 1.0.1
+
+- [docs] fix example code
+
+## 1.0.0
+
+- Initial Release
