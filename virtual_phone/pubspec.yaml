@@ -1,30 +1,30 @@
 name: virtual_phone
-version: 1.0.0
+version: 2.0.0
 description: A web-based smart phone simulator.
-homepage: https://github.com/rubydogjp/packages/tree/main/virtual_phone
-publish_to: none
+repository: https://github.com/rubydogjp/packages/tree/main/virtual_phone
+issue_tracker: https://github.com/rubydogjp/packages/issues
 
 environment:
   sdk: ^3.11.0
-  flutter: ^3.41.2
+  flutter: '>=3.41.2'
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  freezed_annotation:
-  json_annotation:
-  collection:
-  flutter_riverpod:
-  flutter_hooks:
-  uuid:
+  freezed_annotation: ^3.1.0
+  json_annotation: ^4.11.0
+  collection: ^1.19.1
+  flutter_riverpod: ^2.6.1
+  flutter_hooks: ^0.21.3
+  uuid: ^4.5.3
 
 dev_dependencies:
-  flutter_lints:
-  build_runner:
-  freezed:
-  json_serializable:
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.0
+  freezed: ^3.1.0
+  json_serializable: ^6.9.0
 
 flutter:
   assets:
