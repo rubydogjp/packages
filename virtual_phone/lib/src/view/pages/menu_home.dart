@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/control_device_section_header.dart';
-import '../widgets/minimal_section_list.dart';
-import '../widgets/pick_locale_navigation_tile.dart';
-import '../widgets/pick_model_navigation_tile.dart';
-import '../widgets/pick_model_section_header.dart';
-import '../widgets/section.dart';
-import '../widgets/settings_app_section_header.dart';
-import '../widgets/switch_bold_text_tile.dart';
-import '../widgets/switch_dark_mode_tile.dart';
-import '../widgets/switch_device_rotation_tile.dart';
-import '../widgets/switch_show_keyboard_tile.dart';
-import '../widgets/take_screenshot_tile.dart';
-import '../widgets/test_navigation_tile.dart';
-import '../widgets/test_section_header.dart';
-import '../widgets/text_scale_slider_tile.dart';
+import '../widgets/menu/control_device_section_header.dart';
+import '../widgets/common/minimal_section_list.dart';
+import '../widgets/menu/pick_locale_navigation_tile.dart';
+import '../widgets/menu/pick_model_navigation_tile.dart';
+import '../widgets/menu/pick_model_section_header.dart';
+import '../widgets/common/section.dart';
+import '../widgets/menu/settings_app_section_header.dart';
+import '../widgets/menu/switch_bold_text_tile.dart';
+import '../widgets/menu/switch_dark_mode_tile.dart';
+import '../widgets/menu/switch_device_rotation_tile.dart';
+import '../widgets/menu/switch_show_keyboard_tile.dart';
+import '../widgets/menu/take_screenshot_tile.dart';
+import '../widgets/menu/test_navigation_tile.dart';
+import '../widgets/menu/test_section_header.dart';
+import '../widgets/menu/text_scale_slider_tile.dart';
 
 class MenuHomePage extends StatelessWidget {
   const MenuHomePage({

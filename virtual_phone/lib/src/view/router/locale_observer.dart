@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../state/os_settings/provider.dart';
+import '../../state/os_settings.dart';
 import 'locale_inherited.dart';
 
 class LocaleObserver extends ConsumerWidget {

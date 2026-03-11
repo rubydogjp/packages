@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/cursor_layer.dart';
-import '../widgets/recording_action_detector.dart';
+import '../widgets/cursor/cursor_layer.dart';
+import '../widgets/testing/recording_action_detector.dart';
 
 final testScopeKey = GlobalKey();
 

@@ -1,3 +1,3 @@
-import '../src/logic/config/types/config.dart';
+import '../src/logic/config.dart';
 
 typedef VirtualPhoneConfig = Config;

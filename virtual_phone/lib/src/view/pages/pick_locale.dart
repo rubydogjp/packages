@@ -1,15 +1,15 @@
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'package:flutter/material.dart';
-import 'package:virtual_phone/src/view/widgets/minimal_page.dart';
-import 'package:virtual_phone/src/view/widgets/minimal_section_header.dart';
-import 'package:virtual_phone/src/view/widgets/minimal_section_list.dart';
-import 'package:virtual_phone/src/view/widgets/pick_locale_tile.dart';
-import 'package:virtual_phone/src/view/widgets/section.dart';
+import 'package:virtual_phone/src/view/widgets/common/minimal_page.dart';
+import 'package:virtual_phone/src/view/widgets/common/minimal_section_header.dart';
+import 'package:virtual_phone/src/view/widgets/common/minimal_section_list.dart';
+import 'package:virtual_phone/src/view/widgets/menu/pick_locale_tile.dart';
+import 'package:virtual_phone/src/view/widgets/common/section.dart';
 
 import '../../external/locales/config.dart';
 import '../../external/locales/models/named_locale.dart';
-import '../widgets/minimal_text_field.dart';
+import '../widgets/common/minimal_text_field.dart';
 
 class PickLocalePage extends HookWidget {
   const PickLocalePage({

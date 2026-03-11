@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../state/device_model/provider.dart';
+import '../../state/device_model.dart';
 import '../router/test_scope.dart';
-import '../widgets/device.dart';
+import '../widgets/device/device.dart';
 
 class DeviceContainerPage extends ConsumerWidget {
   const DeviceContainerPage({

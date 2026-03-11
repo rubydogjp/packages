@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:virtual_phone/src/state/device_state/provider.dart';
+import 'package:virtual_phone/src/state/device_state.dart';
 
 class RotationObserver extends ConsumerWidget {
   const RotationObserver({

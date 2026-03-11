@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../logic/config/types/config.dart';
+import '../../logic/config.dart';
 
 class ConfigInherited extends InheritedWidget {
   const ConfigInherited({

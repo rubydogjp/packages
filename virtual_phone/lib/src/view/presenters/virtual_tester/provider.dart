@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../state/finger_cursor_position/provider.dart';
-import '../../../state/show_ripples/provider.dart';
+import '../../../state/cursor.dart';
+
 import 'virtual_tester.dart';
 
 final virtualTesterProvider = Provider<VirtualTester>(

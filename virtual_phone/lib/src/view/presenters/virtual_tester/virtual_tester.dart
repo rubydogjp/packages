@@ -1,10 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import '../../../logic/finger_cursor/types/position.dart';
+import '../../../logic/position.dart';
 import '../../router/test_scope.dart';
-import '../../../state/finger_cursor_position/notifier.dart';
-import '../../../state/show_ripples/notifier.dart';
+import '../../../state/cursor.dart';
 
 class VirtualTester {
   const VirtualTester({

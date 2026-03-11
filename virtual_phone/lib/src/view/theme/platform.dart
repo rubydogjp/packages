@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../logic/device_model/types/index.dart' as logic;
+import '../../logic/device_model/device_model.dart' as logic;
 
 TargetPlatform toFlutterPlatform(logic.SoftwarePlatform platform) {
   return switch (platform) {

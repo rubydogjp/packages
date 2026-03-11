@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../logic/test_action/types/test_action.dart';
-import '../../../state/doing_action_id/notifier.dart';
+import '../../../logic/test_action.dart';
+import '../../../state/testing.dart';
 import '../virtual_tester/virtual_tester.dart';
 
 class ActionListPlayer {

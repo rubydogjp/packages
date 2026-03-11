@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../state/doing_action_id/provider.dart';
-import '../../../state/action_list/provider.dart';
+import '../../../state/testing.dart';
+
 import '../virtual_tester/provider.dart';
 import 'action_list_player.dart';
 

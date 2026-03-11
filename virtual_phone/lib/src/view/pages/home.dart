@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../router/locale_inherited.dart';
 import '../router/navigator_shell.dart';
-import '../widgets/side_menu_page.dart';
+import '../widgets/common/side_menu_page.dart';
 import 'menu_home.dart';
 import 'device_container.dart';
 

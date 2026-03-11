@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../logic/device_model/types/preset_model.dart';
-import '../widgets/classic_model_section_header.dart';
-import '../widgets/fantasy_model_section_header.dart';
-import '../widgets/minimal_page.dart';
-import '../widgets/section.dart';
-import '../widgets/minimal_section_list.dart';
-import '../widgets/pick_model_tile.dart';
-import '../widgets/standard_model_section_header.dart';
+import '../../logic/device_model/device_model.dart';
+import '../widgets/menu/classic_model_section_header.dart';
+import '../widgets/menu/fantasy_model_section_header.dart';
+import '../widgets/common/minimal_page.dart';
+import '../widgets/common/section.dart';
+import '../widgets/common/minimal_section_list.dart';
+import '../widgets/menu/pick_model_tile.dart';
+import '../widgets/menu/standard_model_section_header.dart';
 
 class PickModelPage extends StatelessWidget {
   const PickModelPage({

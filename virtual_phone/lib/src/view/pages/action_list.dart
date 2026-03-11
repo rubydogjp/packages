@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../state/action_list/provider.dart';
-import '../widgets/action_list.dart';
-import '../widgets/playing_button.dart';
-import '../widgets/recording_button.dart';
+import '../../state/testing.dart';
+import '../widgets/testing/action_list.dart';
+import '../widgets/testing/playing_button.dart';
+import '../widgets/testing/recording_button.dart';
 
 class ActionListPage extends ConsumerWidget {
   const ActionListPage({super.key});

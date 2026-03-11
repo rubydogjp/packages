@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:virtual_phone/src/view/router/splash_shell.dart';
 
-import '../../logic/config/types/config.dart';
+import '../../logic/config.dart';
 import 'config_inherited.dart';
 import 'locale_observer.dart';
 

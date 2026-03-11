@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:virtual_phone/src/state/device_model/provider.dart';
-import 'package:virtual_phone/src/view/widgets/on_appear.dart';
+import 'package:virtual_phone/src/state/device_model.dart';
+import 'package:virtual_phone/src/view/widgets/common/on_appear.dart';
 
-import '../../logic/config/types/config.dart';
-import '../../logic/device_model/types/index.dart';
+import '../../logic/config.dart';
+import '../../logic/device_model/device_model.dart';
 import 'config_inherited.dart';
 
 class SplashShell extends ConsumerWidget {
