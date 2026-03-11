@@ -275,6 +275,102 @@ void main() {
     });
   });
 
+  group('Sealed after build', () {
+    test('throws if route added after router is accessed', () {
+      final app = GoRouterExpress(initialLocation: '/');
+      app.get('/', (req, res) => res.page(const Text('Home')));
+      app.router; // triggers build
+      expect(
+        () => app.get('/late', (req, res) => res.page(const Text('Late'))),
+        throwsA(isA<StateError>()),
+      );
+    });
+
+    test('throws if use() called after router is accessed', () {
+      final app = GoRouterExpress(initialLocation: '/');
+      app.get('/', (req, res) => res.page(const Text('Home')));
+      app.router;
+      expect(
+        () => app.use([_TestMiddleware((req, res, next) => next())]),
+        throwsA(isA<StateError>()),
+      );
+    });
+  });
+
+  group('Middleware redirect', () {
+    testWidgets('middleware can redirect via res.redirect', (tester) async {
+      final app = GoRouterExpress(initialLocation: '/protected');
+      app.get('/protected', (req, res) {
+        res.page(const Text('Protected'));
+      }, middlewares: [
+        _TestMiddleware((req, res, next) {
+          res.redirect('/login');
+          return const SizedBox.shrink();
+        }),
+      ]);
+      app.get('/login', (req, res) {
+        res.page(const Text('Login'));
+      });
+
+      await tester.pumpWidget(MaterialApp.router(routerConfig: app.router));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Login'), findsOneWidget);
+      expect(find.text('Protected'), findsNothing);
+    });
+  });
+
+  group('Global middleware inheritance', () {
+    testWidgets('global middleware applies to group routes', (tester) async {
+      final executionOrder = <String>[];
+
+      final app = GoRouterExpress(initialLocation: '/api/data');
+      app.use([
+        _TestMiddleware((req, res, next) {
+          executionOrder.add('global');
+          return next();
+        }),
+      ]);
+      app.group('/api', (api) {
+        api.get('/data', (req, res) {
+          executionOrder.add('handler');
+          res.page(const Text('Data'));
+        });
+      });
+
+      await tester.pumpWidget(MaterialApp.router(routerConfig: app.router));
+      await tester.pumpAndSettle();
+
+      expect(executionOrder, ['global', 'handler']);
+    });
+
+    testWidgets('global middleware applies to shell routes', (tester) async {
+      final executionOrder = <String>[];
+
+      final app = GoRouterExpress(initialLocation: '/dashboard');
+      app.use([
+        _TestMiddleware((req, res, next) {
+          executionOrder.add('global');
+          return next();
+        }),
+      ]);
+      app.shell(
+        (context, state, child) => child,
+        (shell) {
+          shell.get('/dashboard', (req, res) {
+            executionOrder.add('handler');
+            res.page(const Text('Dashboard'));
+          });
+        },
+      );
+
+      await tester.pumpWidget(MaterialApp.router(routerConfig: app.router));
+      await tester.pumpAndSettle();
+
+      expect(executionOrder, ['global', 'handler']);
+    });
+  });
+
   group('WidgetRequest', () {
     testWidgets('accesses all path parameters', (tester) async {
       final app = GoRouterExpress(

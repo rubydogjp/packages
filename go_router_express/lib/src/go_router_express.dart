@@ -60,12 +60,24 @@ class RouteGroup {
   final List<_RouteNode> _nodes = [];
   final List<WidgetMiddleware> _middlewares = [];
 
+  bool _sealed = false;
+
+  void _assertNotSealed() {
+    if (_sealed) {
+      throw StateError(
+        'Cannot modify routes after the router has been built. '
+        'Register all routes before accessing .router.',
+      );
+    }
+  }
+
   /// Adds middleware that applies to all routes in this group.
   ///
   /// ```dart
   /// app.use([LoggingMiddleware(), AuthMiddleware()]);
   /// ```
   void use(List<WidgetMiddleware> middlewares) {
+    _assertNotSealed();
     _middlewares.addAll(middlewares);
   }
 
@@ -86,6 +98,7 @@ class RouteGroup {
     List<WidgetMiddleware> middlewares = const [],
     String? name,
   }) {
+    _assertNotSealed();
     _nodes.add(_LeafRoute(
       path: path,
       handler: handler,
@@ -106,6 +119,7 @@ class RouteGroup {
   /// });
   /// ```
   void group(String prefix, void Function(RouteGroup group) setup) {
+    _assertNotSealed();
     final group = RouteGroup();
     setup(group);
     _nodes.add(_GroupNode(prefix: prefix, group: group));
@@ -134,6 +148,7 @@ class RouteGroup {
     void Function(RouteGroup shell) setup, {
     List<WidgetMiddleware> middlewares = const [],
   }) {
+    _assertNotSealed();
     final shell = RouteGroup();
     setup(shell);
     _nodes.add(_ShellNode(
@@ -149,6 +164,7 @@ class RouteGroup {
   /// app.redirect('/old-page', '/new-page');
   /// ```
   void redirect(String from, String to) {
+    _assertNotSealed();
     _nodes.add(_RedirectRoute(from: from, to: to));
   }
 }
@@ -201,6 +217,7 @@ class GoRouterExpress extends RouteGroup {
   GoRouter get router => _router ??= _buildRouter();
 
   GoRouter _buildRouter() {
+    _sealed = true;
     final routes = _buildRouteList(_nodes, _middlewares, '');
     return GoRouter(
       routes: routes,
