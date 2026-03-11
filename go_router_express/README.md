@@ -5,75 +5,118 @@ An Express.js-like wrapper for [go_router](https://pub.dev/packages/go_router).
 ## Usage
 
 ```dart
-final express = GoRouterExpress((app) {
-  app.get('/', [], (req, res) {
-    res.page(const HomePage());
-  });
+final app = GoRouterExpress();
 
-  app.get('/details', [], (req, res) {
-    res.page(const DetailsPage());
-  });
+app.get('/', (req, res) {
+  res.page(const HomePage());
+});
+
+app.get('/users/:id', (req, res) {
+  final id = req.intParam('id');
+  res.page(UserPage(id: id!));
 });
 
 void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp.router(routerConfig: express.router);
-  }
+  runApp(MaterialApp.router(routerConfig: app.router));
 }
 ```
 
 ## Middleware
 
 ```dart
-class LoggingMiddleware extends WidgetMiddleware {
+class AuthMiddleware extends WidgetMiddleware {
   @override
   Widget build(WidgetRequest req, WidgetResponse res, Widget Function() next) {
-    debugPrint('Route: ${req.path}');
+    if (req.query('token') == null) {
+      return const Text('Unauthorized');
+    }
     return next();
   }
 }
 
-// Use middleware in routes
-final express = GoRouterExpress((app) {
-  app.get('/details', [LoggingMiddleware()], (req, res) {
-    res.page(const DetailsPage());
-  });
+// Per-route middleware
+app.get('/admin', (req, res) {
+  res.page(const AdminPage());
+}, middlewares: [AuthMiddleware()]);
+
+// Global middleware — applies to all routes
+app.use([LoggingMiddleware()]);
+```
+
+## Route Groups
+
+```dart
+app.group('/api', (api) {
+  api.get('/users', (req, res) { ... });   // matches /api/users
+  api.get('/posts', (req, res) { ... });   // matches /api/posts
 });
+```
+
+## Shell Routes
+
+Shared layouts using go_router's ShellRoute:
+
+```dart
+app.shell(
+  (context, state, child) => Scaffold(
+    appBar: AppBar(title: const Text('Dashboard')),
+    body: child,
+  ),
+  (shell) {
+    shell.get('/home', (req, res) => res.page(const HomePage()));
+    shell.get('/settings', (req, res) => res.page(const SettingsPage()));
+  },
+);
+```
+
+## Typed Parameters
+
+```dart
+app.get('/users/:id', (req, res) {
+  final id = req.intParam('id');          // int?
+  final price = req.doubleParam('price'); // double?
+});
+
+app.get('/search', (req, res) {
+  final page = req.intQuery('page');       // int?
+  final active = req.boolQuery('active');  // bool?
+});
+```
+
+## Redirects
+
+```dart
+// Simple redirect
+app.redirect('/old-page', '/new-page');
+
+// Redirect in handler
+app.get('/gate', (req, res) {
+  res.redirect('/target');
+});
+```
+
+## Named Routes
+
+```dart
+app.get('/users/:id', (req, res) {
+  res.page(UserPage(id: req.params('id')!));
+}, name: 'user');
 ```
 
 ## Navigation
 
-go_router is re-exported, so you can use all go_router extensions:
+go_router is re-exported, so all go_router extensions are available:
 
 ```dart
-// go - replace navigation stack
 context.go('/details');
-
-// push - add to navigation stack
 context.push('/details');
-
-// pop - go back
 context.pop();
-
-// From button
-ElevatedButton(
-  onPressed: () => context.go('/details'),
-  child: const Text('Go to Details'),
-);
 ```
 
 ## Issues
 
 For bug reports and feature requests, please visit:
 [GitHub issues](https://github.com/rubydogjp/packages/issues)
-
 
 ## License
 

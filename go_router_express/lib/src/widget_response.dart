@@ -6,15 +6,9 @@ import 'package:flutter/widgets.dart';
 /// similar to Express.js response object.
 class WidgetResponse {
   /// Creates a new [WidgetResponse] instance.
-  WidgetResponse({required this.context});
+  WidgetResponse();
 
-  /// The [BuildContext] associated with this response.
-  final BuildContext context;
-
-  /// The widget to be rendered. This is set by calling [page].
   Widget? _widget;
-
-  /// The redirect location. This is set by calling [redirect].
   String? _redirectLocation;
 
   /// Returns true if a response has been set (either widget or redirect).

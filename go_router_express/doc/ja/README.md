@@ -5,42 +5,28 @@ Flutter (Android/iOS) で使うためのパッケージ
 - go_router を薄くラップした (かなり依存強め. 最新の v16系統に対応)
 - node.js の express のような書き心地
 - response で json ではなく widget を返せることが特徴. Scaffold で作られた widget を想定
-- 内部的には get routerConfig を呼び出されたときに GoRouter のインスタンスを生成し、保持する
 
 ## インストール
 
 ```yaml
 dependencies:
-  go_router_express: ^1.0.0
+  go_router_express: ^2.0.0
 ```
 
-## 使い心地
+## 基本的な使い方
 
 ```dart
-final app = GoRouterExpress((app) {
-  app.get('/todos/:id', [], (req, res) {
-    final id = req.params('id');
-    res.page(TodoPage(id: id));
-  });
+final app = GoRouterExpress();
+
+app.get('/todos/:id', (req, res) {
+  final id = req.params('id');
+  res.page(TodoPage(id: id!));
 });
 
 void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: app.router,
-    );
-  }
+  runApp(MaterialApp.router(routerConfig: app.router));
 }
 ```
-
-- get のみ対応. post, put, delete は未対応
-- res.redirect も可能
-- app.router -> MaterialApp.router() に渡す GoRouter インスタンス
 
 ## ミドルウェア
 
@@ -55,9 +41,82 @@ class AuthMiddleware extends WidgetMiddleware {
   }
 }
 
-app.get('/admin', [AuthMiddleware()], (req, res) {
+// ルートごとのミドルウェア
+app.get('/admin', (req, res) {
   res.page(AdminPage());
+}, middlewares: [AuthMiddleware()]);
+
+// グローバルミドルウェア — 全ルートに適用
+app.use([LoggingMiddleware()]);
+```
+
+## ルートグループ
+
+共通のパスプレフィックスでルートをグループ化:
+
+```dart
+app.group('/api', (api) {
+  api.get('/users', handler);   // /api/users にマッチ
+  api.get('/posts', handler);   // /api/posts にマッチ
 });
+
+// ネストも可能
+app.group('/api', (api) {
+  api.group('/v1', (v1) {
+    v1.get('/users', handler);  // /api/v1/users にマッチ
+  });
+});
+```
+
+## シェルルート
+
+go_router の ShellRoute による共通レイアウト:
+
+```dart
+app.shell(
+  (context, state, child) => Scaffold(
+    appBar: AppBar(title: const Text('Dashboard')),
+    body: child,
+  ),
+  (shell) {
+    shell.get('/home', (req, res) => res.page(const HomePage()));
+    shell.get('/settings', (req, res) => res.page(const SettingsPage()));
+  },
+);
+```
+
+## 型付きパラメータ
+
+```dart
+app.get('/users/:id', (req, res) {
+  final id = req.intParam('id');          // int?
+  final price = req.doubleParam('price'); // double?
+});
+
+app.get('/search', (req, res) {
+  final page = req.intQuery('page');       // int?
+  final active = req.boolQuery('active');  // bool?
+});
+```
+
+## リダイレクト
+
+```dart
+// シンプルなリダイレクト
+app.redirect('/old-page', '/new-page');
+
+// ハンドラ内でのリダイレクト
+app.get('/gate', (req, res) {
+  res.redirect('/target');
+});
+```
+
+## 名前付きルート
+
+```dart
+app.get('/users/:id', (req, res) {
+  res.page(UserPage(id: req.params('id')!));
+}, name: 'user');
 ```
 
 ## 画面遷移
@@ -73,25 +132,29 @@ context.push('/detail-page');
 
 // pop - 戻る
 context.pop();
-
-// ボタンから遷移
-ElevatedButton(
-  onPressed: () => context.push('/detail'),
-  child: Text('詳細へ'),
-);
 ```
 
 ## API
 
 **GoRouterExpress**
-- `get(String path, List<WidgetMiddleware> middlewares, RouteHandler handler)` - ルート登録
+- `get(String path, RouteHandler handler, {middlewares, name})` - ルート登録
+- `use(List<WidgetMiddleware> middlewares)` - グローバルミドルウェア追加
+- `group(String prefix, void Function(RouteGroup) setup)` - ルートグループ
+- `shell(builder, void Function(RouteGroup) setup)` - シェルルート
+- `redirect(String from, String to)` - リダイレクト登録
 - `router` - MaterialApp.router() に渡す GoRouter インスタンス
 
 **WidgetRequest**
-- `params(String name)` - パスパラメータ取得
-- `query(String name)` - クエリパラメータ取得
+- `params(String name)` - パスパラメータ取得 (String?)
+- `intParam(String name)` - パスパラメータを int で取得
+- `doubleParam(String name)` - パスパラメータを double で取得
+- `query(String name)` - クエリパラメータ取得 (String?)
+- `intQuery(String name)` - クエリパラメータを int で取得
+- `doubleQuery(String name)` - クエリパラメータを double で取得
+- `boolQuery(String name)` - クエリパラメータを bool で取得
 - `pathParams` - 全パスパラメータ
 - `queryParams` - 全クエリパラメータ
+- `extraAs<T>()` - 型付き extra データ取得
 
 **WidgetResponse**
 - `page(Widget widget)` - ページ Widget を返す
@@ -99,6 +162,27 @@ ElevatedButton(
 
 **WidgetMiddleware**
 - `build(WidgetRequest req, WidgetResponse res, Widget Function() next)` - ミドルウェア処理
+
+**RouteGroup**
+- `get()`, `use()`, `group()`, `shell()`, `redirect()` - GoRouterExpress と同じ API
+
+## v1 → v2 移行ガイド
+
+```dart
+// v1
+final app = GoRouterExpress((app) {
+  app.get('/path', [middleware], handler);
+});
+
+// v2
+final app = GoRouterExpress();
+app.get('/path', handler, middlewares: [middleware]);
+```
+
+主な変更点:
+- コンストラクタからセットアップコールバックを削除
+- `get()` の引数順: `(path, handler, {middlewares, name})`
+- `WidgetResponse` のコンストラクタから `context` を削除
 
 ## Issues
 
