@@ -1,3 +1,13 @@
+## 2.0.0
+
+- **New**: Preset generation methods: `numeric()`, `hex()`, `lowercase()`, `alphanumeric()`
+- **New**: Prefix support on all methods (Stripe-style IDs)
+- **New**: `NanoidCharset` with predefined character sets
+- **New**: `Nanoid.entropy()` for entropy calculation
+- **New**: `Nanoid.collisionTime()` for collision probability estimation
+- **New**: Comprehensive test suite
+- Require Dart 3.11.0
+
 ## 1.8.0
 
 - [docs] give up Language anchors

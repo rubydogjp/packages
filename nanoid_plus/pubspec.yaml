@@ -1,10 +1,10 @@
 name: nanoid_plus
 description: A small, secure, and URL-safe ID generator for Dart.
-version: 1.8.0
+version: 2.0.0
 repository: https://github.com/rubydogjp/packages/tree/main/nanoid_plus
 
 environment:
-  sdk: ^3.9.0
+  sdk: ^3.11.0
 
 dev_dependencies:
   lints: ^6.0.0

@@ -1,3 +1,7 @@
+## 2.0.1
+
+- Require Flutter 3.41.2 / Dart 3.11.0
+
 ## 2.0.0
 
 ### Breaking Changes
