@@ -1,3 +1,10 @@
+## 2.0.1
+
+- Upgrade to `flutter_riverpod` ^3.0.0 (internal implementation; no public API change)
+- Bump `flutter_lints` to ^6.0.0, `build_runner` to ^2.15.0, `json_serializable` to ^6.14.0, `json_annotation` to ^4.12.0
+- Complete freezed 3 migration for `DeviceState` and `OSSettings`
+- Require Flutter 3.44.1 / Dart 3.12.0
+
 ## 2.0.0
 
 - Fix non-uniform scaling across different virtual devices

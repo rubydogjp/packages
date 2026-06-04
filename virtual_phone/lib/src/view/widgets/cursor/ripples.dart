@@ -41,7 +41,7 @@ class RipplesState extends State<Ripples> with TickerProviderStateMixin {
     Color color,
   ) {
     final opacity = (1.0 - (value / 4.0)).clamp(0.0, 1.0);
-    final colorWithOpacity = color.withOpacity(opacity);
+    final colorWithOpacity = color.withValues(alpha: opacity);
     final size = rect.width / 2;
     final area = size * size;
     final radius = math.sqrt(area * value / 4);

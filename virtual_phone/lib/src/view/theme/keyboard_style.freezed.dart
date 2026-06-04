@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,219 +9,275 @@ part of 'keyboard_style.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
 mixin _$KeyboardStyle {
-  Color get backgroundColor => throw _privateConstructorUsedError;
-  Color get button1BackgroundColor => throw _privateConstructorUsedError;
-  Color get button1ForegroundColor => throw _privateConstructorUsedError;
-  Color get button2BackgroundColor => throw _privateConstructorUsedError;
-  Color get button2ForegroundColor => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
-  $KeyboardStyleCopyWith<KeyboardStyle> get copyWith =>
-      throw _privateConstructorUsedError;
+ Color get backgroundColor; Color get button1BackgroundColor; Color get button1ForegroundColor; Color get button2BackgroundColor; Color get button2ForegroundColor;
+/// Create a copy of KeyboardStyle
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$KeyboardStyleCopyWith<KeyboardStyle> get copyWith => _$KeyboardStyleCopyWithImpl<KeyboardStyle>(this as KeyboardStyle, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is KeyboardStyle&&(identical(other.backgroundColor, backgroundColor) || other.backgroundColor == backgroundColor)&&(identical(other.button1BackgroundColor, button1BackgroundColor) || other.button1BackgroundColor == button1BackgroundColor)&&(identical(other.button1ForegroundColor, button1ForegroundColor) || other.button1ForegroundColor == button1ForegroundColor)&&(identical(other.button2BackgroundColor, button2BackgroundColor) || other.button2BackgroundColor == button2BackgroundColor)&&(identical(other.button2ForegroundColor, button2ForegroundColor) || other.button2ForegroundColor == button2ForegroundColor));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,backgroundColor,button1BackgroundColor,button1ForegroundColor,button2BackgroundColor,button2ForegroundColor);
+
+@override
+String toString() {
+  return 'KeyboardStyle(backgroundColor: $backgroundColor, button1BackgroundColor: $button1BackgroundColor, button1ForegroundColor: $button1ForegroundColor, button2BackgroundColor: $button2BackgroundColor, button2ForegroundColor: $button2ForegroundColor)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $KeyboardStyleCopyWith<$Res> {
-  factory $KeyboardStyleCopyWith(
-          KeyboardStyle value, $Res Function(KeyboardStyle) then) =
-      _$KeyboardStyleCopyWithImpl<$Res, KeyboardStyle>;
-  @useResult
-  $Res call(
-      {Color backgroundColor,
-      Color button1BackgroundColor,
-      Color button1ForegroundColor,
-      Color button2BackgroundColor,
-      Color button2ForegroundColor});
-}
+abstract mixin class $KeyboardStyleCopyWith<$Res>  {
+  factory $KeyboardStyleCopyWith(KeyboardStyle value, $Res Function(KeyboardStyle) _then) = _$KeyboardStyleCopyWithImpl;
+@useResult
+$Res call({
+ Color backgroundColor, Color button1BackgroundColor, Color button1ForegroundColor, Color button2BackgroundColor, Color button2ForegroundColor
+});
 
+
+
+
+}
 /// @nodoc
-class _$KeyboardStyleCopyWithImpl<$Res, $Val extends KeyboardStyle>
+class _$KeyboardStyleCopyWithImpl<$Res>
     implements $KeyboardStyleCopyWith<$Res> {
-  _$KeyboardStyleCopyWithImpl(this._value, this._then);
+  _$KeyboardStyleCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final KeyboardStyle _self;
+  final $Res Function(KeyboardStyle) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? backgroundColor = null,
-    Object? button1BackgroundColor = null,
-    Object? button1ForegroundColor = null,
-    Object? button2BackgroundColor = null,
-    Object? button2ForegroundColor = null,
-  }) {
-    return _then(_value.copyWith(
-      backgroundColor: null == backgroundColor
-          ? _value.backgroundColor
-          : backgroundColor // ignore: cast_nullable_to_non_nullable
-              as Color,
-      button1BackgroundColor: null == button1BackgroundColor
-          ? _value.button1BackgroundColor
-          : button1BackgroundColor // ignore: cast_nullable_to_non_nullable
-              as Color,
-      button1ForegroundColor: null == button1ForegroundColor
-          ? _value.button1ForegroundColor
-          : button1ForegroundColor // ignore: cast_nullable_to_non_nullable
-              as Color,
-      button2BackgroundColor: null == button2BackgroundColor
-          ? _value.button2BackgroundColor
-          : button2BackgroundColor // ignore: cast_nullable_to_non_nullable
-              as Color,
-      button2ForegroundColor: null == button2ForegroundColor
-          ? _value.button2ForegroundColor
-          : button2ForegroundColor // ignore: cast_nullable_to_non_nullable
-              as Color,
-    ) as $Val);
-  }
+/// Create a copy of KeyboardStyle
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? backgroundColor = null,Object? button1BackgroundColor = null,Object? button1ForegroundColor = null,Object? button2BackgroundColor = null,Object? button2ForegroundColor = null,}) {
+  return _then(_self.copyWith(
+backgroundColor: null == backgroundColor ? _self.backgroundColor : backgroundColor // ignore: cast_nullable_to_non_nullable
+as Color,button1BackgroundColor: null == button1BackgroundColor ? _self.button1BackgroundColor : button1BackgroundColor // ignore: cast_nullable_to_non_nullable
+as Color,button1ForegroundColor: null == button1ForegroundColor ? _self.button1ForegroundColor : button1ForegroundColor // ignore: cast_nullable_to_non_nullable
+as Color,button2BackgroundColor: null == button2BackgroundColor ? _self.button2BackgroundColor : button2BackgroundColor // ignore: cast_nullable_to_non_nullable
+as Color,button2ForegroundColor: null == button2ForegroundColor ? _self.button2ForegroundColor : button2ForegroundColor // ignore: cast_nullable_to_non_nullable
+as Color,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [KeyboardStyle].
+extension KeyboardStylePatterns on KeyboardStyle {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _KeyboardStyle value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _KeyboardStyle() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _KeyboardStyle value)  $default,){
+final _that = this;
+switch (_that) {
+case _KeyboardStyle():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _KeyboardStyle value)?  $default,){
+final _that = this;
+switch (_that) {
+case _KeyboardStyle() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Color backgroundColor,  Color button1BackgroundColor,  Color button1ForegroundColor,  Color button2BackgroundColor,  Color button2ForegroundColor)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _KeyboardStyle() when $default != null:
+return $default(_that.backgroundColor,_that.button1BackgroundColor,_that.button1ForegroundColor,_that.button2BackgroundColor,_that.button2ForegroundColor);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Color backgroundColor,  Color button1BackgroundColor,  Color button1ForegroundColor,  Color button2BackgroundColor,  Color button2ForegroundColor)  $default,) {final _that = this;
+switch (_that) {
+case _KeyboardStyle():
+return $default(_that.backgroundColor,_that.button1BackgroundColor,_that.button1ForegroundColor,_that.button2BackgroundColor,_that.button2ForegroundColor);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Color backgroundColor,  Color button1BackgroundColor,  Color button1ForegroundColor,  Color button2BackgroundColor,  Color button2ForegroundColor)?  $default,) {final _that = this;
+switch (_that) {
+case _KeyboardStyle() when $default != null:
+return $default(_that.backgroundColor,_that.button1BackgroundColor,_that.button1ForegroundColor,_that.button2BackgroundColor,_that.button2ForegroundColor);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
-abstract class _$$KeyboardStyleImplCopyWith<$Res>
-    implements $KeyboardStyleCopyWith<$Res> {
-  factory _$$KeyboardStyleImplCopyWith(
-          _$KeyboardStyleImpl value, $Res Function(_$KeyboardStyleImpl) then) =
-      __$$KeyboardStyleImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {Color backgroundColor,
-      Color button1BackgroundColor,
-      Color button1ForegroundColor,
-      Color button2BackgroundColor,
-      Color button2ForegroundColor});
+
+
+class _KeyboardStyle implements KeyboardStyle {
+  const _KeyboardStyle({required this.backgroundColor, required this.button1BackgroundColor, required this.button1ForegroundColor, required this.button2BackgroundColor, required this.button2ForegroundColor});
+  
+
+@override final  Color backgroundColor;
+@override final  Color button1BackgroundColor;
+@override final  Color button1ForegroundColor;
+@override final  Color button2BackgroundColor;
+@override final  Color button2ForegroundColor;
+
+/// Create a copy of KeyboardStyle
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$KeyboardStyleCopyWith<_KeyboardStyle> get copyWith => __$KeyboardStyleCopyWithImpl<_KeyboardStyle>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _KeyboardStyle&&(identical(other.backgroundColor, backgroundColor) || other.backgroundColor == backgroundColor)&&(identical(other.button1BackgroundColor, button1BackgroundColor) || other.button1BackgroundColor == button1BackgroundColor)&&(identical(other.button1ForegroundColor, button1ForegroundColor) || other.button1ForegroundColor == button1ForegroundColor)&&(identical(other.button2BackgroundColor, button2BackgroundColor) || other.button2BackgroundColor == button2BackgroundColor)&&(identical(other.button2ForegroundColor, button2ForegroundColor) || other.button2ForegroundColor == button2ForegroundColor));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,backgroundColor,button1BackgroundColor,button1ForegroundColor,button2BackgroundColor,button2ForegroundColor);
+
+@override
+String toString() {
+  return 'KeyboardStyle(backgroundColor: $backgroundColor, button1BackgroundColor: $button1BackgroundColor, button1ForegroundColor: $button1ForegroundColor, button2BackgroundColor: $button2BackgroundColor, button2ForegroundColor: $button2ForegroundColor)';
+}
+
+
 }
 
 /// @nodoc
-class __$$KeyboardStyleImplCopyWithImpl<$Res>
-    extends _$KeyboardStyleCopyWithImpl<$Res, _$KeyboardStyleImpl>
-    implements _$$KeyboardStyleImplCopyWith<$Res> {
-  __$$KeyboardStyleImplCopyWithImpl(
-      _$KeyboardStyleImpl _value, $Res Function(_$KeyboardStyleImpl) _then)
-      : super(_value, _then);
+abstract mixin class _$KeyboardStyleCopyWith<$Res> implements $KeyboardStyleCopyWith<$Res> {
+  factory _$KeyboardStyleCopyWith(_KeyboardStyle value, $Res Function(_KeyboardStyle) _then) = __$KeyboardStyleCopyWithImpl;
+@override @useResult
+$Res call({
+ Color backgroundColor, Color button1BackgroundColor, Color button1ForegroundColor, Color button2BackgroundColor, Color button2ForegroundColor
+});
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? backgroundColor = null,
-    Object? button1BackgroundColor = null,
-    Object? button1ForegroundColor = null,
-    Object? button2BackgroundColor = null,
-    Object? button2ForegroundColor = null,
-  }) {
-    return _then(_$KeyboardStyleImpl(
-      backgroundColor: null == backgroundColor
-          ? _value.backgroundColor
-          : backgroundColor // ignore: cast_nullable_to_non_nullable
-              as Color,
-      button1BackgroundColor: null == button1BackgroundColor
-          ? _value.button1BackgroundColor
-          : button1BackgroundColor // ignore: cast_nullable_to_non_nullable
-              as Color,
-      button1ForegroundColor: null == button1ForegroundColor
-          ? _value.button1ForegroundColor
-          : button1ForegroundColor // ignore: cast_nullable_to_non_nullable
-              as Color,
-      button2BackgroundColor: null == button2BackgroundColor
-          ? _value.button2BackgroundColor
-          : button2BackgroundColor // ignore: cast_nullable_to_non_nullable
-              as Color,
-      button2ForegroundColor: null == button2ForegroundColor
-          ? _value.button2ForegroundColor
-          : button2ForegroundColor // ignore: cast_nullable_to_non_nullable
-              as Color,
-    ));
-  }
+
+
+
 }
-
 /// @nodoc
+class __$KeyboardStyleCopyWithImpl<$Res>
+    implements _$KeyboardStyleCopyWith<$Res> {
+  __$KeyboardStyleCopyWithImpl(this._self, this._then);
 
-class _$KeyboardStyleImpl implements _KeyboardStyle {
-  const _$KeyboardStyleImpl(
-      {required this.backgroundColor,
-      required this.button1BackgroundColor,
-      required this.button1ForegroundColor,
-      required this.button2BackgroundColor,
-      required this.button2ForegroundColor});
+  final _KeyboardStyle _self;
+  final $Res Function(_KeyboardStyle) _then;
 
-  @override
-  final Color backgroundColor;
-  @override
-  final Color button1BackgroundColor;
-  @override
-  final Color button1ForegroundColor;
-  @override
-  final Color button2BackgroundColor;
-  @override
-  final Color button2ForegroundColor;
-
-  @override
-  String toString() {
-    return 'KeyboardStyle(backgroundColor: $backgroundColor, button1BackgroundColor: $button1BackgroundColor, button1ForegroundColor: $button1ForegroundColor, button2BackgroundColor: $button2BackgroundColor, button2ForegroundColor: $button2ForegroundColor)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$KeyboardStyleImpl &&
-            (identical(other.backgroundColor, backgroundColor) ||
-                other.backgroundColor == backgroundColor) &&
-            (identical(other.button1BackgroundColor, button1BackgroundColor) ||
-                other.button1BackgroundColor == button1BackgroundColor) &&
-            (identical(other.button1ForegroundColor, button1ForegroundColor) ||
-                other.button1ForegroundColor == button1ForegroundColor) &&
-            (identical(other.button2BackgroundColor, button2BackgroundColor) ||
-                other.button2BackgroundColor == button2BackgroundColor) &&
-            (identical(other.button2ForegroundColor, button2ForegroundColor) ||
-                other.button2ForegroundColor == button2ForegroundColor));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      backgroundColor,
-      button1BackgroundColor,
-      button1ForegroundColor,
-      button2BackgroundColor,
-      button2ForegroundColor);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$KeyboardStyleImplCopyWith<_$KeyboardStyleImpl> get copyWith =>
-      __$$KeyboardStyleImplCopyWithImpl<_$KeyboardStyleImpl>(this, _$identity);
+/// Create a copy of KeyboardStyle
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? backgroundColor = null,Object? button1BackgroundColor = null,Object? button1ForegroundColor = null,Object? button2BackgroundColor = null,Object? button2ForegroundColor = null,}) {
+  return _then(_KeyboardStyle(
+backgroundColor: null == backgroundColor ? _self.backgroundColor : backgroundColor // ignore: cast_nullable_to_non_nullable
+as Color,button1BackgroundColor: null == button1BackgroundColor ? _self.button1BackgroundColor : button1BackgroundColor // ignore: cast_nullable_to_non_nullable
+as Color,button1ForegroundColor: null == button1ForegroundColor ? _self.button1ForegroundColor : button1ForegroundColor // ignore: cast_nullable_to_non_nullable
+as Color,button2BackgroundColor: null == button2BackgroundColor ? _self.button2BackgroundColor : button2BackgroundColor // ignore: cast_nullable_to_non_nullable
+as Color,button2ForegroundColor: null == button2ForegroundColor ? _self.button2ForegroundColor : button2ForegroundColor // ignore: cast_nullable_to_non_nullable
+as Color,
+  ));
 }
 
-abstract class _KeyboardStyle implements KeyboardStyle {
-  const factory _KeyboardStyle(
-      {required final Color backgroundColor,
-      required final Color button1BackgroundColor,
-      required final Color button1ForegroundColor,
-      required final Color button2BackgroundColor,
-      required final Color button2ForegroundColor}) = _$KeyboardStyleImpl;
 
-  @override
-  Color get backgroundColor;
-  @override
-  Color get button1BackgroundColor;
-  @override
-  Color get button1ForegroundColor;
-  @override
-  Color get button2BackgroundColor;
-  @override
-  Color get button2ForegroundColor;
-  @override
-  @JsonKey(ignore: true)
-  _$$KeyboardStyleImplCopyWith<_$KeyboardStyleImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
+
+// dart format on

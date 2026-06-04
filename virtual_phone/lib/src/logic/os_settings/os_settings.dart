@@ -5,7 +5,7 @@ part 'os_settings.g.dart';
 
 /// OSSettings
 @freezed
-class OSSettings with _$OSSettings {
+abstract class OSSettings with _$OSSettings {
   const factory OSSettings({
     required String locale,
     required bool isDarkMode,

@@ -6,8 +6,8 @@ part of 'os_settings.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$DeviceSettingsImpl _$$DeviceSettingsImplFromJson(Map<String, dynamic> json) =>
-    _$DeviceSettingsImpl(
+_DeviceSettings _$DeviceSettingsFromJson(Map<String, dynamic> json) =>
+    _DeviceSettings(
       locale: json['locale'] as String,
       isDarkMode: json['isDarkMode'] as bool,
       boldText: json['boldText'] as bool,
@@ -18,8 +18,7 @@ _$DeviceSettingsImpl _$$DeviceSettingsImplFromJson(Map<String, dynamic> json) =>
       textScale: (json['textScale'] as num).toDouble(),
     );
 
-Map<String, dynamic> _$$DeviceSettingsImplToJson(
-        _$DeviceSettingsImpl instance) =>
+Map<String, dynamic> _$DeviceSettingsToJson(_DeviceSettings instance) =>
     <String, dynamic>{
       'locale': instance.locale,
       'isDarkMode': instance.isDarkMode,

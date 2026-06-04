@@ -4,7 +4,7 @@ part 'device_state.freezed.dart';
 part 'device_state.g.dart';
 
 @freezed
-class DeviceState with _$DeviceState {
+abstract class DeviceState with _$DeviceState {
   const factory DeviceState({
     required bool isPortrait,
     required bool showKeyboard,

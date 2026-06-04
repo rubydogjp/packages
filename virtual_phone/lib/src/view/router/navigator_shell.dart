@@ -12,7 +12,7 @@ class NavigatorShell extends StatelessWidget {
   Widget build(BuildContext context) {
     return HeroControllerScope.none(
       child: Navigator(
-        onGenerateInitialRoutes: (_, __) {
+        onGenerateInitialRoutes: (_, _) {
           return [
             MaterialPageRoute(
               builder: builder,

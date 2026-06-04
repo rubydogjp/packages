@@ -6,13 +6,12 @@ part of 'device_state.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$DeviceStateImpl _$$DeviceStateImplFromJson(Map<String, dynamic> json) =>
-    _$DeviceStateImpl(
-      isPortrait: json['isPortrait'] as bool,
-      showKeyboard: json['showKeyboard'] as bool,
-    );
+_DeviceState _$DeviceStateFromJson(Map<String, dynamic> json) => _DeviceState(
+  isPortrait: json['isPortrait'] as bool,
+  showKeyboard: json['showKeyboard'] as bool,
+);
 
-Map<String, dynamic> _$$DeviceStateImplToJson(_$DeviceStateImpl instance) =>
+Map<String, dynamic> _$DeviceStateToJson(_DeviceState instance) =>
     <String, dynamic>{
       'isPortrait': instance.isPortrait,
       'showKeyboard': instance.showKeyboard,
