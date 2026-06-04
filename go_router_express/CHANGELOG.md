@@ -1,3 +1,10 @@
+## 3.0.0
+
+### Breaking Changes
+
+- Upgrade to `go_router` ^17.0.0 (re-exported, so consumers receive go_router 17's API).
+- Require Flutter 3.44.1 / Dart 3.12.0.
+
 ## 2.0.1
 
 - Require Flutter 3.41.2 / Dart 3.11.0
