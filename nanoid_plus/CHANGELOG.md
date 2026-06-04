@@ -1,3 +1,8 @@
+## 2.0.1
+
+- Require Dart 3.12.0
+- Bump `test` to 1.31.1
+
 ## 2.0.0
 
 - **New**: Preset generation methods: `numeric()`, `hex()`, `lowercase()`, `alphanumeric()`
