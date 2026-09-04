@@ -1,3 +1,8 @@
+## 2.0.2
+
+- Require Dart 3.13.0
+- Bump `test` to 1.32.0, `lints` to 6.1.0
+
 ## 2.0.1
 
 - Require Dart 3.12.0
