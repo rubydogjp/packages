@@ -1,3 +1,14 @@
+## 4.0.0
+
+### Breaking Changes
+
+- Upgrade to `go_router` ^18.0.0 (re-exported, so consumers receive go_router 18's API, which is now backed by the standalone `material_ui` and `cupertino_ui` packages).
+- Require Flutter 3.47.2 / Dart 3.13.0.
+
+### Other
+
+- Bump `lints` to 6.1.0.
+
 ## 3.0.0
 
 ### Breaking Changes
