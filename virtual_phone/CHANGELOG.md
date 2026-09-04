@@ -1,3 +1,9 @@
+## 2.0.2
+
+- Upgrade to `freezed` ^4.0.1 and regenerate (code generation only; no public API change)
+- Bump `build_runner` to ^2.16.1, `json_serializable` to ^6.14.1, `uuid` to ^4.6.0
+- Require Flutter 3.47.2 / Dart 3.13.0
+
 ## 2.0.1
 
 - Upgrade to `flutter_riverpod` ^3.0.0 (internal implementation; no public API change)

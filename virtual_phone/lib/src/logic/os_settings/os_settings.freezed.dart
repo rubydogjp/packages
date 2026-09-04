@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'os_settings.dart';
@@ -9,6 +9,7 @@ part of 'os_settings.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 OSSettings _$OSSettingsFromJson(
@@ -35,16 +36,21 @@ $OSSettingsCopyWith<OSSettings> get copyWith => _$OSSettingsCopyWithImpl<OSSetti
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is OSSettings&&(identical(other.locale, locale) || other.locale == locale)&&(identical(other.isDarkMode, isDarkMode) || other.isDarkMode == isDarkMode)&&(identical(other.boldText, boldText) || other.boldText == boldText)&&(identical(other.disableAnimations, disableAnimations) || other.disableAnimations == disableAnimations)&&(identical(other.highContrast, highContrast) || other.highContrast == highContrast)&&(identical(other.accessibleNavigation, accessibleNavigation) || other.accessibleNavigation == accessibleNavigation)&&(identical(other.invertColors, invertColors) || other.invertColors == invertColors)&&(identical(other.textScale, textScale) || other.textScale == textScale));
+  final _this = this as OSSettings;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OSSettings&&(identical(other.locale, _this.locale) || other.locale == _this.locale)&&(identical(other.isDarkMode, _this.isDarkMode) || other.isDarkMode == _this.isDarkMode)&&(identical(other.boldText, _this.boldText) || other.boldText == _this.boldText)&&(identical(other.disableAnimations, _this.disableAnimations) || other.disableAnimations == _this.disableAnimations)&&(identical(other.highContrast, _this.highContrast) || other.highContrast == _this.highContrast)&&(identical(other.accessibleNavigation, _this.accessibleNavigation) || other.accessibleNavigation == _this.accessibleNavigation)&&(identical(other.invertColors, _this.invertColors) || other.invertColors == _this.invertColors)&&(identical(other.textScale, _this.textScale) || other.textScale == _this.textScale));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,locale,isDarkMode,boldText,disableAnimations,highContrast,accessibleNavigation,invertColors,textScale);
+int get hashCode {
+  final _this = this as OSSettings;
+  return Object.hash(runtimeType,_this.locale,_this.isDarkMode,_this.boldText,_this.disableAnimations,_this.highContrast,_this.accessibleNavigation,_this.invertColors,_this.textScale);
+}
 
 @override
 String toString() {
-  return 'OSSettings(locale: $locale, isDarkMode: $isDarkMode, boldText: $boldText, disableAnimations: $disableAnimations, highContrast: $highContrast, accessibleNavigation: $accessibleNavigation, invertColors: $invertColors, textScale: $textScale)';
+  final _this = this as OSSettings;
+  return 'OSSettings(locale: ${_this.locale}, isDarkMode: ${_this.isDarkMode}, boldText: ${_this.boldText}, disableAnimations: ${_this.disableAnimations}, highContrast: ${_this.highContrast}, accessibleNavigation: ${_this.accessibleNavigation}, invertColors: ${_this.invertColors}, textScale: ${_this.textScale})';
 }
 
 
@@ -73,7 +79,7 @@ class _$OSSettingsCopyWithImpl<$Res>
 /// Create a copy of OSSettings
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? locale = null,Object? isDarkMode = null,Object? boldText = null,Object? disableAnimations = null,Object? highContrast = null,Object? accessibleNavigation = null,Object? invertColors = null,Object? textScale = null,}) {
-  return _then(_self.copyWith(
+  return _then(OSSettings(
 locale: null == locale ? _self.locale : locale // ignore: cast_nullable_to_non_nullable
 as String,isDarkMode: null == isDarkMode ? _self.isDarkMode : isDarkMode // ignore: cast_nullable_to_non_nullable
 as bool,boldText: null == boldText ? _self.boldText : boldText // ignore: cast_nullable_to_non_nullable
@@ -248,16 +254,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DeviceSettings&&(identical(other.locale, locale) || other.locale == locale)&&(identical(other.isDarkMode, isDarkMode) || other.isDarkMode == isDarkMode)&&(identical(other.boldText, boldText) || other.boldText == boldText)&&(identical(other.disableAnimations, disableAnimations) || other.disableAnimations == disableAnimations)&&(identical(other.highContrast, highContrast) || other.highContrast == highContrast)&&(identical(other.accessibleNavigation, accessibleNavigation) || other.accessibleNavigation == accessibleNavigation)&&(identical(other.invertColors, invertColors) || other.invertColors == invertColors)&&(identical(other.textScale, textScale) || other.textScale == textScale));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _DeviceSettings&&(identical(other.locale, locale) || other.locale == locale)&&(identical(other.isDarkMode, isDarkMode) || other.isDarkMode == isDarkMode)&&(identical(other.boldText, boldText) || other.boldText == boldText)&&(identical(other.disableAnimations, disableAnimations) || other.disableAnimations == disableAnimations)&&(identical(other.highContrast, highContrast) || other.highContrast == highContrast)&&(identical(other.accessibleNavigation, accessibleNavigation) || other.accessibleNavigation == accessibleNavigation)&&(identical(other.invertColors, invertColors) || other.invertColors == invertColors)&&(identical(other.textScale, textScale) || other.textScale == textScale));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,locale,isDarkMode,boldText,disableAnimations,highContrast,accessibleNavigation,invertColors,textScale);
+int get hashCode {
+    return Object.hash(runtimeType,locale,isDarkMode,boldText,disableAnimations,highContrast,accessibleNavigation,invertColors,textScale);
+}
 
 @override
 String toString() {
-  return 'OSSettings(locale: $locale, isDarkMode: $isDarkMode, boldText: $boldText, disableAnimations: $disableAnimations, highContrast: $highContrast, accessibleNavigation: $accessibleNavigation, invertColors: $invertColors, textScale: $textScale)';
+    return 'OSSettings(locale: $locale, isDarkMode: $isDarkMode, boldText: $boldText, disableAnimations: $disableAnimations, highContrast: $highContrast, accessibleNavigation: $accessibleNavigation, invertColors: $invertColors, textScale: $textScale)';
 }
 
 
