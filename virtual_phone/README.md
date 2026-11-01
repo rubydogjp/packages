@@ -1,4 +1,4 @@
-![Header](https://github.com/rubydogjp/packages/blob/main/virtual_phone/static/header-logo.png?raw=true)
+![Virtual Phone](https://github.com/rubydogjp/packages/blob/main/virtual_phone/static/marketing.png?raw=true)
 
 
 A web-based smart phone simulator.
