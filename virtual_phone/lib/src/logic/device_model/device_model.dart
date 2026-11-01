@@ -113,6 +113,18 @@ enum PresetModel {
   /// Android (classic) - T-Mobile G1 2008
   classicAndroid('classic-android'),
 
+  /// Nexus One - Google 2010
+  nexusOne('nexus-one'),
+
+  /// Pixel - Google 2016
+  pixel('pixel'),
+
+  /// vPhone (original) - rubydog
+  vphoneOriginal('vphone-original'),
+
+  /// vPhone (2nd generation) - rubydog
+  vphone2nd('vphone-2nd'),
+
   /// vPhone
   vphone('vphone'),
 

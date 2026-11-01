@@ -9,10 +9,10 @@ final classicIphone = DeviceModel(
   hardwareImageUri: 'assets/images/classic-iphone.png',
   hardwareScreen: const HardwareScreen(
     bezelRatio: BezelRatio(
-      left: 0.101,
-      top: 0.1712,
-      right: 0.0836,
-      bottom: 0.1737,
+      left: 0.098148,
+      top: 0.172925,
+      right: 0.087037,
+      bottom: 0.174901,
     ),
     logicalWidth: 320,
     logicalHeight: 480,

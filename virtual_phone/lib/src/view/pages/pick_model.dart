@@ -29,11 +29,23 @@ class PickModelPage extends StatelessWidget {
               PickModelTile(
                 modelId: PresetModel.classicAndroid.id,
               ),
+              PickModelTile(
+                modelId: PresetModel.nexusOne.id,
+              ),
+              PickModelTile(
+                modelId: PresetModel.pixel.id,
+              ),
             ],
           ),
           StaticSection(
             header: const FantasyModelSectionHeader(),
             tiles: [
+              PickModelTile(
+                modelId: PresetModel.vphoneOriginal.id,
+              ),
+              PickModelTile(
+                modelId: PresetModel.vphone2nd.id,
+              ),
               PickModelTile(
                 modelId: PresetModel.rotom.id,
               ),
