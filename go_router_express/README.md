@@ -43,6 +43,39 @@ app.get('/admin', (req, res) {
 app.use([LoggingMiddleware()]);
 ```
 
+## Guards
+
+Guards decide whether a request may reach its route. Return `null` to let it
+through, or a location to redirect to. They run before the page is built, so a
+guarded page never flashes on screen.
+
+```dart
+final auth = AuthState(); // a ChangeNotifier holding the sign-in state
+
+// Re-run guards whenever the sign-in state changes
+final app = GoRouterExpress(refreshListenable: auth);
+
+// Per-route guard
+app.get('/settings', (req, res) {
+  res.page(const SettingsPage());
+}, guards: [(req) => auth.isSignedIn ? null : '/login']);
+
+// Group guard — applies to every route in the group
+app.group('/admin', (admin) {
+  admin.guard((req) => auth.isAdmin ? null : '/');
+  admin.get('/users', (req, res) => res.page(const AdminUsersPage()));
+});
+
+// Guards can be async
+app.get('/billing', (req, res) {
+  res.page(const BillingPage());
+}, guards: [(req) async => await auth.hasPlan() ? null : '/pricing']);
+```
+
+Guards run outermost first (app → group → shell → route) and stop at the first
+one that redirects. A guard added to the whole app with `app.guard()` also runs
+for the page it redirects to, so let that page through to avoid a loop.
+
 ## Route Groups
 
 ```dart

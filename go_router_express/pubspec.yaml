@@ -1,6 +1,6 @@
 name: go_router_express
 description: An Express.js-like wrapper for go_router that provides a familiar routing API for Flutter applications.
-version: 4.0.0
+version: 4.1.0
 repository: https://github.com/rubydogjp/packages/tree/main/go_router_express
 issue_tracker: https://github.com/rubydogjp/packages/issues
 
@@ -11,7 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  go_router: ^18.0.0
+  go_router: ^18.1.2
 
 dev_dependencies:
   flutter_test:

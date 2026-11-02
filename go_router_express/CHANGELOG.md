@@ -1,3 +1,17 @@
+## 4.1.0
+
+### New Features
+
+- **Route guards**: `RouteGuard` decides whether a request may reach its route, returning `null` to let it through or a location to redirect to. Guards run before the page is built (backed by go_router's `redirect`), so a guarded page never flashes on screen, and they may be async.
+  - `app.guard(guard)` on the app or any group / shell applies to every route inside it
+  - `guards:` parameter on `get()` and `shell()`
+  - Run outermost first (app → group → shell → route) and stop at the first redirect
+- **`refreshListenable`** on `GoRouterExpress` re-runs guards whenever it notifies (e.g. on sign-out).
+
+### Other
+
+- Bump `go_router` to ^18.1.2.
+
 ## 4.0.0
 
 ### Breaking Changes

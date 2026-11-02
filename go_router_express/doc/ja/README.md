@@ -2,7 +2,7 @@
 
 Flutter (Android/iOS) で使うためのパッケージ
 
-- go_router を薄くラップした (かなり依存強め. 最新の v16系統に対応)
+- go_router を薄くラップした (かなり依存強め. go_router v18 系統に対応)
 - node.js の express のような書き心地
 - response で json ではなく widget を返せることが特徴. Scaffold で作られた widget を想定
 
@@ -10,7 +10,7 @@ Flutter (Android/iOS) で使うためのパッケージ
 
 ```yaml
 dependencies:
-  go_router_express: ^2.0.0
+  go_router_express: ^4.1.0
 ```
 
 ## 基本的な使い方
@@ -49,6 +49,37 @@ app.get('/admin', (req, res) {
 // グローバルミドルウェア — 全ルートに適用
 app.use([LoggingMiddleware()]);
 ```
+
+## ガード
+
+ガードはリクエストがルートへ進んでよいかを決めます。`null` を返すと通し、パスを返すとそこへリダイレクトします。
+ページを組み立てる前に実行されるので、ガードされたページが一瞬表示されることもありません。
+
+```dart
+final auth = AuthState(); // ログイン状態を持つ ChangeNotifier
+
+// ログイン状態が変わるたびにガードを実行し直す
+final app = GoRouterExpress(refreshListenable: auth);
+
+// ルートごとのガード
+app.get('/settings', (req, res) {
+  res.page(const SettingsPage());
+}, guards: [(req) => auth.isSignedIn ? null : '/login']);
+
+// グループのガード — グループ内の全ルートに適用
+app.group('/admin', (admin) {
+  admin.guard((req) => auth.isAdmin ? null : '/');
+  admin.get('/users', (req, res) => res.page(const AdminUsersPage()));
+});
+
+// 非同期のガードも書ける
+app.get('/billing', (req, res) {
+  res.page(const BillingPage());
+}, guards: [(req) async => await auth.hasPlan() ? null : '/pricing']);
+```
+
+ガードは外側から順に (アプリ → グループ → シェル → ルート) 実行され、最初にリダイレクト先を返したところで止まります。
+`app.guard()` でアプリ全体に付けたガードはリダイレクト先のページでも実行されるので、ループしないようにそのページは通してください。
 
 ## ルートグループ
 
@@ -137,10 +168,12 @@ context.pop();
 ## API
 
 **GoRouterExpress**
-- `get(String path, RouteHandler handler, {middlewares, name})` - ルート登録
+- `GoRouterExpress({initialLocation, debugLogDiagnostics, errorBuilder, refreshListenable})` - `refreshListenable` が通知するとガードを実行し直す
+- `get(String path, RouteHandler handler, {middlewares, guards, name})` - ルート登録
 - `use(List<WidgetMiddleware> middlewares)` - グローバルミドルウェア追加
+- `guard(RouteGuard guard)` - ガード追加 (グループ内の全ルートに適用)
 - `group(String prefix, void Function(RouteGroup) setup)` - ルートグループ
-- `shell(builder, void Function(RouteGroup) setup)` - シェルルート
+- `shell(builder, void Function(RouteGroup) setup, {middlewares, guards})` - シェルルート
 - `redirect(String from, String to)` - リダイレクト登録
 - `router` - MaterialApp.router() に渡す GoRouter インスタンス
 
@@ -163,8 +196,11 @@ context.pop();
 **WidgetMiddleware**
 - `build(WidgetRequest req, WidgetResponse res, Widget Function() next)` - ミドルウェア処理
 
+**RouteGuard**
+- `FutureOr<String?> Function(WidgetRequest req)` - `null` で通過、パスを返すとリダイレクト
+
 **RouteGroup**
-- `get()`, `use()`, `group()`, `shell()`, `redirect()` - GoRouterExpress と同じ API
+- `get()`, `use()`, `guard()`, `group()`, `shell()`, `redirect()` - GoRouterExpress と同じ API
 
 ## v1 → v2 移行ガイド
 

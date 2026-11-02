@@ -13,7 +13,10 @@ class LoggingMiddleware extends WidgetMiddleware {
 
 // --- App setup ---
 
-final app = GoRouterExpress();
+/// Sign-in state. Guards re-run whenever it changes.
+final signedIn = ValueNotifier(false);
+
+final app = GoRouterExpress(refreshListenable: signedIn);
 
 void setupRoutes() {
   // Global middleware — applies to all routes
@@ -42,6 +45,15 @@ void setupRoutes() {
     settings.get('/theme', (req, res) {
       res.page(const Center(child: Text('Theme Settings')));
     });
+  });
+
+  // Guard — only signed-in users can see their account
+  app.get('/account', (req, res) {
+    res.page(const AccountPage());
+  }, guards: [(req) => signedIn.value ? null : '/sign-in']);
+
+  app.get('/sign-in', (req, res) {
+    res.page(const SignInPage());
   });
 
   // Redirect
@@ -87,6 +99,11 @@ class HomePage extends StatelessWidget {
               onPressed: () => context.go('/settings/profile'),
               child: const Text('Profile Settings'),
             ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () => context.go('/account'),
+              child: const Text('Account (guarded)'),
+            ),
           ],
         ),
       ),
@@ -121,6 +138,44 @@ class UserPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('User $id')),
       body: Center(child: Text('User ID: $id')),
+    );
+  }
+}
+
+class SignInPage extends StatelessWidget {
+  const SignInPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Sign in')),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            signedIn.value = true;
+            context.go('/account');
+          },
+          child: const Text('Sign in'),
+        ),
+      ),
+    );
+  }
+}
+
+class AccountPage extends StatelessWidget {
+  const AccountPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Account')),
+      body: Center(
+        child: ElevatedButton(
+          // The guard sends the user to /sign-in as soon as this changes.
+          onPressed: () => signedIn.value = false,
+          child: const Text('Sign out'),
+        ),
+      ),
     );
   }
 }

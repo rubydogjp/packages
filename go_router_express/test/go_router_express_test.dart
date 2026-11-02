@@ -43,9 +43,7 @@ void main() {
     });
 
     testWidgets('handles multiple path parameters', (tester) async {
-      final app = GoRouterExpress(
-        initialLocation: '/users/123/posts/456',
-      );
+      final app = GoRouterExpress(initialLocation: '/users/123/posts/456');
       app.get('/users/:userId/posts/:postId', (req, res) {
         final userId = req.params('userId');
         final postId = req.params('postId');
@@ -129,9 +127,7 @@ void main() {
       expect(find.text('API v1 Users'), findsOneWidget);
     });
 
-    testWidgets('group middleware applies to all child routes', (
-      tester,
-    ) async {
+    testWidgets('group middleware applies to all child routes', (tester) async {
       final executionOrder = <String>[];
 
       final app = GoRouterExpress(initialLocation: '/api/data');
@@ -160,7 +156,10 @@ void main() {
       final app = GoRouterExpress(initialLocation: '/dashboard');
       app.shell(
         (context, state, child) => Column(
-          children: [const Text('Shell Header'), Expanded(child: child)],
+          children: [
+            const Text('Shell Header'),
+            Expanded(child: child),
+          ],
         ),
         (shell) {
           shell.get('/dashboard', (req, res) {
@@ -211,15 +210,19 @@ void main() {
           return next();
         }),
       ]);
-      app.get('/page', (req, res) {
-        executionOrder.add('handler');
-        res.page(const Text('Page'));
-      }, middlewares: [
-        _TestMiddleware((req, res, next) {
-          executionOrder.add('route');
-          return next();
-        }),
-      ]);
+      app.get(
+        '/page',
+        (req, res) {
+          executionOrder.add('handler');
+          res.page(const Text('Page'));
+        },
+        middlewares: [
+          _TestMiddleware((req, res, next) {
+            executionOrder.add('route');
+            return next();
+          }),
+        ],
+      );
 
       await tester.pumpWidget(MaterialApp.router(routerConfig: app.router));
       await tester.pumpAndSettle();
@@ -261,9 +264,7 @@ void main() {
       final app = GoRouterExpress(initialLocation: '/protected');
       app.get('/protected', (req, res) {
         res.redirect('/login');
-      }, middlewares: [
-        _TestMiddleware((req, res, next) => next()),
-      ]);
+      }, middlewares: [_TestMiddleware((req, res, next) => next())]);
       app.get('/login', (req, res) {
         res.page(const Text('Login Page'));
       });
@@ -300,14 +301,18 @@ void main() {
   group('Middleware redirect', () {
     testWidgets('middleware can redirect via res.redirect', (tester) async {
       final app = GoRouterExpress(initialLocation: '/protected');
-      app.get('/protected', (req, res) {
-        res.page(const Text('Protected'));
-      }, middlewares: [
-        _TestMiddleware((req, res, next) {
-          res.redirect('/login');
-          return const SizedBox.shrink();
-        }),
-      ]);
+      app.get(
+        '/protected',
+        (req, res) {
+          res.page(const Text('Protected'));
+        },
+        middlewares: [
+          _TestMiddleware((req, res, next) {
+            res.redirect('/login');
+            return const SizedBox.shrink();
+          }),
+        ],
+      );
       app.get('/login', (req, res) {
         res.page(const Text('Login'));
       });
@@ -354,15 +359,12 @@ void main() {
           return next();
         }),
       ]);
-      app.shell(
-        (context, state, child) => child,
-        (shell) {
-          shell.get('/dashboard', (req, res) {
-            executionOrder.add('handler');
-            res.page(const Text('Dashboard'));
-          });
-        },
-      );
+      app.shell((context, state, child) => child, (shell) {
+        shell.get('/dashboard', (req, res) {
+          executionOrder.add('handler');
+          res.page(const Text('Dashboard'));
+        });
+      });
 
       await tester.pumpWidget(MaterialApp.router(routerConfig: app.router));
       await tester.pumpAndSettle();
@@ -373,9 +375,7 @@ void main() {
 
   group('WidgetRequest', () {
     testWidgets('accesses all path parameters', (tester) async {
-      final app = GoRouterExpress(
-        initialLocation: '/users/123/posts/456',
-      );
+      final app = GoRouterExpress(initialLocation: '/users/123/posts/456');
       app.get('/users/:userId/posts/:postId', (req, res) {
         final params = req.pathParams;
         expect(params['userId'], '123');
@@ -514,15 +514,19 @@ void main() {
       final executionOrder = <String>[];
 
       final app = GoRouterExpress(initialLocation: '/protected');
-      app.get('/protected', (req, res) {
-        executionOrder.add('handler');
-        res.page(const Text('Protected Page'));
-      }, middlewares: [
-        _TestMiddleware((req, res, next) {
-          executionOrder.add('middleware');
-          return next();
-        }),
-      ]);
+      app.get(
+        '/protected',
+        (req, res) {
+          executionOrder.add('handler');
+          res.page(const Text('Protected Page'));
+        },
+        middlewares: [
+          _TestMiddleware((req, res, next) {
+            executionOrder.add('middleware');
+            return next();
+          }),
+        ],
+      );
 
       await tester.pumpWidget(MaterialApp.router(routerConfig: app.router));
       await tester.pumpAndSettle();
@@ -532,17 +536,21 @@ void main() {
 
     testWidgets('allows middleware to return widget directly', (tester) async {
       final app = GoRouterExpress(initialLocation: '/protected');
-      app.get('/protected', (req, res) {
-        res.page(const Text('Protected Page'));
-      }, middlewares: [
-        _TestMiddleware((req, res, next) {
-          final token = req.query('token');
-          if (token != 'valid') {
-            return const Text('Unauthorized');
-          }
-          return next();
-        }),
-      ]);
+      app.get(
+        '/protected',
+        (req, res) {
+          res.page(const Text('Protected Page'));
+        },
+        middlewares: [
+          _TestMiddleware((req, res, next) {
+            final token = req.query('token');
+            if (token != 'valid') {
+              return const Text('Unauthorized');
+            }
+            return next();
+          }),
+        ],
+      );
 
       await tester.pumpWidget(MaterialApp.router(routerConfig: app.router));
       await tester.pumpAndSettle();
@@ -551,23 +559,23 @@ void main() {
       expect(find.text('Protected Page'), findsNothing);
     });
 
-    testWidgets('allows middleware to pass through to handler', (
-      tester,
-    ) async {
-      final app = GoRouterExpress(
-        initialLocation: '/protected?token=valid',
+    testWidgets('allows middleware to pass through to handler', (tester) async {
+      final app = GoRouterExpress(initialLocation: '/protected?token=valid');
+      app.get(
+        '/protected',
+        (req, res) {
+          res.page(const Text('Protected Page'));
+        },
+        middlewares: [
+          _TestMiddleware((req, res, next) {
+            final token = req.query('token');
+            if (token != 'valid') {
+              return const Text('Unauthorized');
+            }
+            return next();
+          }),
+        ],
       );
-      app.get('/protected', (req, res) {
-        res.page(const Text('Protected Page'));
-      }, middlewares: [
-        _TestMiddleware((req, res, next) {
-          final token = req.query('token');
-          if (token != 'valid') {
-            return const Text('Unauthorized');
-          }
-          return next();
-        }),
-      ]);
 
       await tester.pumpWidget(MaterialApp.router(routerConfig: app.router));
       await tester.pumpAndSettle();
@@ -580,23 +588,27 @@ void main() {
       final executionOrder = <String>[];
 
       final app = GoRouterExpress(initialLocation: '/api');
-      app.get('/api', (req, res) {
-        executionOrder.add('handler');
-        res.page(const Text('API Response'));
-      }, middlewares: [
-        _TestMiddleware((req, res, next) {
-          executionOrder.add('middleware1');
-          return next();
-        }),
-        _TestMiddleware((req, res, next) {
-          executionOrder.add('middleware2');
-          return next();
-        }),
-        _TestMiddleware((req, res, next) {
-          executionOrder.add('middleware3');
-          return next();
-        }),
-      ]);
+      app.get(
+        '/api',
+        (req, res) {
+          executionOrder.add('handler');
+          res.page(const Text('API Response'));
+        },
+        middlewares: [
+          _TestMiddleware((req, res, next) {
+            executionOrder.add('middleware1');
+            return next();
+          }),
+          _TestMiddleware((req, res, next) {
+            executionOrder.add('middleware2');
+            return next();
+          }),
+          _TestMiddleware((req, res, next) {
+            executionOrder.add('middleware3');
+            return next();
+          }),
+        ],
+      );
 
       await tester.pumpWidget(MaterialApp.router(routerConfig: app.router));
       await tester.pumpAndSettle();
@@ -615,29 +627,207 @@ void main() {
       final executionOrder = <String>[];
 
       final app = GoRouterExpress(initialLocation: '/api');
-      app.get('/api', (req, res) {
-        executionOrder.add('handler');
-        res.page(const Text('API Response'));
-      }, middlewares: [
-        _TestMiddleware((req, res, next) {
-          executionOrder.add('middleware1');
-          return next();
-        }),
-        _TestMiddleware((req, res, next) {
-          executionOrder.add('blocking');
-          return const Text('Blocked');
-        }),
-        _TestMiddleware((req, res, next) {
-          executionOrder.add('middleware3');
-          return next();
-        }),
-      ]);
+      app.get(
+        '/api',
+        (req, res) {
+          executionOrder.add('handler');
+          res.page(const Text('API Response'));
+        },
+        middlewares: [
+          _TestMiddleware((req, res, next) {
+            executionOrder.add('middleware1');
+            return next();
+          }),
+          _TestMiddleware((req, res, next) {
+            executionOrder.add('blocking');
+            return const Text('Blocked');
+          }),
+          _TestMiddleware((req, res, next) {
+            executionOrder.add('middleware3');
+            return next();
+          }),
+        ],
+      );
 
       await tester.pumpWidget(MaterialApp.router(routerConfig: app.router));
       await tester.pumpAndSettle();
 
       expect(executionOrder, ['middleware1', 'blocking']);
       expect(find.text('Blocked'), findsOneWidget);
+    });
+  });
+
+  group('Guards', () {
+    testWidgets('a passing guard shows the page', (tester) async {
+      final app = GoRouterExpress(initialLocation: '/admin');
+      app.get('/admin', (req, res) {
+        res.page(const Text('Admin'));
+      }, guards: [(req) => null]);
+
+      await tester.pumpWidget(MaterialApp.router(routerConfig: app.router));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Admin'), findsOneWidget);
+    });
+
+    testWidgets('a rejecting guard redirects before the page is built', (
+      tester,
+    ) async {
+      var adminBuilt = false;
+      final app = GoRouterExpress(initialLocation: '/admin');
+      app.get('/admin', (req, res) {
+        adminBuilt = true;
+        res.page(const Text('Admin'));
+      }, guards: [(req) => '/login']);
+      app.get('/login', (req, res) => res.page(const Text('Login')));
+
+      await tester.pumpWidget(MaterialApp.router(routerConfig: app.router));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Login'), findsOneWidget);
+      expect(adminBuilt, isFalse);
+    });
+
+    testWidgets('guards receive the request', (tester) async {
+      final app = GoRouterExpress(initialLocation: '/users/7?token=abc');
+      app.get(
+        '/users/:id',
+        (req, res) {
+          res.page(Text('User ${req.params('id')}'));
+        },
+        guards: [
+          (req) => req.query('token') == 'abc' && req.intParam('id') == 7
+              ? null
+              : '/denied',
+        ],
+      );
+      app.get('/denied', (req, res) => res.page(const Text('Denied')));
+
+      await tester.pumpWidget(MaterialApp.router(routerConfig: app.router));
+      await tester.pumpAndSettle();
+
+      expect(find.text('User 7'), findsOneWidget);
+    });
+
+    testWidgets('async guards are awaited', (tester) async {
+      final app = GoRouterExpress(initialLocation: '/admin');
+      app.get('/admin', (req, res) {
+        res.page(const Text('Admin'));
+      }, guards: [(req) async => '/login']);
+      app.get('/login', (req, res) => res.page(const Text('Login')));
+
+      await tester.pumpWidget(MaterialApp.router(routerConfig: app.router));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Login'), findsOneWidget);
+      expect(find.text('Admin'), findsNothing);
+    });
+
+    testWidgets('app, group, shell and route guards run outermost first', (
+      tester,
+    ) async {
+      final order = <String>[];
+      RouteGuard record(String name) => (req) {
+        order.add(name);
+        return null;
+      };
+
+      final app = GoRouterExpress(initialLocation: '/admin/page');
+      app.guard(record('app'));
+      app.group('/admin', (admin) {
+        admin.guard(record('group'));
+        admin.shell((context, state, child) => child, (shell) {
+          shell.guard(record('shell-use'));
+          shell.get('/page', (req, res) {
+            res.page(const Text('Page'));
+          }, guards: [record('route')]);
+        }, guards: [record('shell')]);
+      });
+
+      await tester.pumpWidget(MaterialApp.router(routerConfig: app.router));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Page'), findsOneWidget);
+      expect(order, ['app', 'group', 'shell', 'shell-use', 'route']);
+    });
+
+    testWidgets('stops at the first guard that redirects', (tester) async {
+      final order = <String>[];
+      final app = GoRouterExpress(initialLocation: '/admin');
+      app.get(
+        '/admin',
+        (req, res) {
+          res.page(const Text('Admin'));
+        },
+        guards: [
+          (req) async {
+            order.add('first');
+            return null;
+          },
+          (req) {
+            order.add('second');
+            return '/login';
+          },
+          (req) {
+            order.add('third');
+            return null;
+          },
+        ],
+      );
+      app.get('/login', (req, res) => res.page(const Text('Login')));
+
+      await tester.pumpWidget(MaterialApp.router(routerConfig: app.router));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Login'), findsOneWidget);
+      expect(order, ['first', 'second']);
+    });
+
+    testWidgets('group guards do not apply outside the group', (tester) async {
+      final app = GoRouterExpress(initialLocation: '/public');
+      app.group('/admin', (admin) {
+        admin.guard((req) => '/login');
+        admin.get('/page', (req, res) => res.page(const Text('Admin')));
+      });
+      app.get('/public', (req, res) => res.page(const Text('Public')));
+      app.get('/login', (req, res) => res.page(const Text('Login')));
+
+      await tester.pumpWidget(MaterialApp.router(routerConfig: app.router));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Public'), findsOneWidget);
+    });
+
+    testWidgets('refreshListenable re-runs guards', (tester) async {
+      final signedIn = ValueNotifier(true);
+      addTearDown(signedIn.dispose);
+
+      final app = GoRouterExpress(
+        initialLocation: '/home',
+        refreshListenable: signedIn,
+      );
+      app.guard((req) {
+        if (req.path == '/login') return null;
+        return signedIn.value ? null : '/login';
+      });
+      app.get('/home', (req, res) => res.page(const Text('Home')));
+      app.get('/login', (req, res) => res.page(const Text('Login')));
+
+      await tester.pumpWidget(MaterialApp.router(routerConfig: app.router));
+      await tester.pumpAndSettle();
+      expect(find.text('Home'), findsOneWidget);
+
+      signedIn.value = false;
+      await tester.pumpAndSettle();
+      expect(find.text('Login'), findsOneWidget);
+    });
+
+    testWidgets('cannot add guards after the router is built', (tester) async {
+      final app = GoRouterExpress();
+      app.get('/', (req, res) => res.page(const Text('Home')));
+      app.router;
+
+      expect(() => app.guard((req) => null), throwsStateError);
     });
   });
 }
@@ -649,14 +839,11 @@ class _TestMiddleware extends WidgetMiddleware {
     WidgetRequest req,
     WidgetResponse res,
     Widget Function() next,
-  ) builder;
+  )
+  builder;
 
   @override
-  Widget build(
-    WidgetRequest req,
-    WidgetResponse res,
-    Widget Function() next,
-  ) {
+  Widget build(WidgetRequest req, WidgetResponse res, Widget Function() next) {
     return builder(req, res, next);
   }
 }

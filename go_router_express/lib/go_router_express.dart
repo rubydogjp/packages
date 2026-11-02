@@ -5,6 +5,7 @@
 /// - Express.js-style route registration with `app.get()`
 /// - Request/response objects for handling routes
 /// - Middleware support for cross-cutting concerns like authentication
+/// - Route guards that redirect before a page is built
 /// - Route groups with shared path prefixes
 /// - Shell routes for shared layouts
 /// - Typed parameter access
