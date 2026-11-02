@@ -1,3 +1,13 @@
+## 2.1.0
+
+- **New**: `Nanoid(random: ...)` to use another source of randomness, e.g. a seeded `Random` for reproducible IDs in tests (defaults to `Random.secure()`)
+- **New**: `Nanoid.isValid()` checks that a string matches a charset, length, and prefix. `charSet` and `length` are required, so a mismatch between generators is caught instead of hidden by a default
+- **New**: `Nanoid.requiredLength()` returns the shortest length that keeps the collision risk under 1% for a given rate and duration (the inverse of `collisionTime()`)
+- **Behavior change**: invalid arguments now throw an `ArgumentError` instead of silently producing a weaker ID: a `length` below 1 (returned an empty ID), a charset with duplicated characters (biased the output), characters outside the Basic Multilingual Plane such as emoji (produced broken strings), or fewer than 2 characters left to pick from
+- **Docs**: state that `length` never counts the prefix, that the prefix is prepended as is, each method's default length, and that randomness is uniform (no modulo bias) and never falls back to a non-secure source
+- **Fix**: `Nanoid.collisionTime()` returned a negative duration for very high entropy (its 1 billion year cap overflowed `Duration`). It is now capped to 100,000 years
+- Bump `test` to 1.33.0
+
 ## 2.0.2
 
 - Require Dart 3.13.0

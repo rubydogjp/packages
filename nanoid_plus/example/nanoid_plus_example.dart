@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:nanoid_plus/nanoid_plus.dart';
 
 void main() {
@@ -40,7 +42,9 @@ void main() {
 
   // How many bits of entropy does the default nanoid have?
   final bits = Nanoid.entropy(length: 21, charsetSize: 64);
-  print('Default nanoid entropy: ${bits.toStringAsFixed(1)} bits'); // 126.0 bits
+  print(
+    'Default nanoid entropy: ${bits.toStringAsFixed(1)} bits',
+  ); // 126.0 bits
 
   // How long until 1% collision probability at 1000 IDs/hour?
   final duration = Nanoid.collisionTime(
@@ -57,4 +61,39 @@ void main() {
     idsPerHour: 100,
   );
   print('6-digit PIN collision risk: ${pinDuration.inMinutes} minutes');
+
+  // --- Validation ---
+
+  // Reject malformed IDs from URLs or user input before a lookup.
+  // Pass the same charset and length the IDs are generated with
+  // (the length never counts the prefix).
+  print(
+    Nanoid.isValid(
+      'usr_V1StGXR8_Z5jdHi6B-myT',
+      charSet: NanoidCharset.urlSafe,
+      length: 21,
+      prefix: 'usr_',
+    ),
+  );
+  // true
+  print(Nanoid.isValid('48a937', charSet: NanoidCharset.numeric, length: 6));
+  // false
+
+  // --- Choosing a length ---
+
+  // Shortest length that stays under 1% collision risk for 10 years
+  // at 1000 IDs/hour
+  final length = Nanoid.requiredLength(
+    charsetSize: NanoidCharset.urlSafe.length,
+    idsPerHour: 1000,
+    duration: const Duration(days: 365 * 10),
+  );
+  print('Required length: $length'); // 10
+
+  // --- Reproducible IDs ---
+
+  // A seeded source gives the same IDs on every run (e.g. in tests).
+  // Keep the default secure source for anything that must be unguessable.
+  final seeded = Nanoid(random: Random(42));
+  print(seeded.urlSafe(length: 8)); // same output every run
 }
