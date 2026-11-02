@@ -1,3 +1,13 @@
+## 2.0.3
+
+- Fix the simulator being unusable on phones and other narrow screens: the menu took 320 px and left the device a few dozen pixels wide. Below 680 px, the device now fills the screen and the menu opens from a button in the top bar
+- Show "画面サイズが足りません / The screen is too small" instead of the simulator below 280 × 280 px
+- Keep the previewed app's state when the layout switches between these modes
+- Stop asking the browser to lock the screen orientation when the simulated device is rotated
+- `VirtualPhone.builder` now returns the app as is outside the web, like `VirtualPhoneScope` (it threw for a missing `ProviderScope`)
+- Fall back to the first preset instead of throwing when `initialModelId` names a model without a frame (e.g. `galaxyS22`)
+- Bump `flutter_riverpod` to ^3.4.3, `build_runner` to ^2.17.1, `freezed` to ^4.0.3, `json_serializable` to ^6.15.2
+
 ## 2.0.2
 
 - Upgrade to `freezed` ^4.0.1 and regenerate (code generation only; no public API change)

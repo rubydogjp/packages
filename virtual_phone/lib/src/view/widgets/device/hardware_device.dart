@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../logic/device_model/device_model.dart';
-import '../../router/rotation_observer.dart';
 import 'hardware_screen.dart';
 
 class HardwareDeviceView extends StatelessWidget {
@@ -52,35 +51,33 @@ class HardwareDeviceView extends StatelessWidget {
             final deviceW = constraints.maxWidth;
             final deviceH = constraints.maxHeight;
 
-            return RotationObserver(
-              child: Stack(
-                children: [
-                  Positioned.fill(
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(
-                        leftR * deviceW,
-                        topR * deviceH,
-                        rightR * deviceW,
-                        bottomR * deviceH,
-                      ),
-                      child: screen,
+            return Stack(
+              children: [
+                Positioned.fill(
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(
+                      leftR * deviceW,
+                      topR * deviceH,
+                      rightR * deviceW,
+                      bottomR * deviceH,
                     ),
+                    child: screen,
                   ),
-                  Positioned.fill(
-                    child: IgnorePointer(
-                      ignoring: true,
-                      child: RotatedBox(
-                        quarterTurns: isPortrait ? 0 : -1,
-                        child: Image.asset(
-                          package: 'virtual_phone',
-                          deviceModel.hardwareImageUri,
-                          fit: BoxFit.contain,
-                        ),
+                ),
+                Positioned.fill(
+                  child: IgnorePointer(
+                    ignoring: true,
+                    child: RotatedBox(
+                      quarterTurns: isPortrait ? 0 : -1,
+                      child: Image.asset(
+                        package: 'virtual_phone',
+                        deviceModel.hardwareImageUri,
+                        fit: BoxFit.contain,
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             );
           },
         ),

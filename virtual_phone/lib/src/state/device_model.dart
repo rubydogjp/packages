@@ -1,5 +1,8 @@
 import 'dart:async';
+
+import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../logic/device_model/presets.dart';
 
 class InitialModelIdNotifier extends AsyncNotifier<String> {
@@ -30,20 +33,19 @@ class DeviceModelIdNotifier extends AsyncNotifier<String> {
 
 final initialModelIdProvider =
     AsyncNotifierProvider<InitialModelIdNotifier, String>(
-  () => InitialModelIdNotifier(),
-);
+      () => InitialModelIdNotifier(),
+    );
 
 final deviceModelIdProvider =
     AsyncNotifierProvider<DeviceModelIdNotifier, String>(
-  () => DeviceModelIdNotifier(),
-);
-
-final deviceModelProvider = Provider(
-  (ref) {
-    final modelId = ref.watch(deviceModelIdProvider);
-    if (!modelId.hasValue) return null;
-    return presetModels.firstWhere(
-      (it) => it.id == modelId.value!,
+      () => DeviceModelIdNotifier(),
     );
-  },
-);
+
+final deviceModelProvider = Provider((ref) {
+  final modelId = ref.watch(deviceModelIdProvider);
+  if (!modelId.hasValue) return null;
+  // Fall back to the first preset for ids without a frame yet
+  // (e.g. PresetModel.galaxyS22) instead of throwing.
+  return presetModels.firstWhereOrNull((it) => it.id == modelId.value!) ??
+      presetModels.first;
+});
